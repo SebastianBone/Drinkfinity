@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]> <html class="no-js lt-ie9" lang="de"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="de"> <!--<![endif]-->
+
+<head>
+	<meta charset="utf-8" />
+
+	<!-- Set the viewport width to device width for mobile -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>Drinkfinity</title>
+
+	<!-- Included CSS Files -->
+	<link rel="stylesheet" href="stylesheets/app.css">
+
+	<script src="javascripts/foundation/modernizr.foundation.js"></script>
+
+	<!-- Included CSS Files -->
+	<link rel="stylesheet" href="stylesheets/app.css">
+	<link rel="stylesheet" href="stylesheets/general_foundicons.css">
+
+	<link rel="stylesheet" href="stylesheets/jquery-ui.css" />
+</head>
+
+<body>
+	<!-- container -->
+	<div class="container full-height" id="main-container">
+	<div id="background-bar" style="position: absolute; z-index:0; width: 100%; background-color:#ddd"></div>	
+		<div class="row full-height" id="main-row">
+
+			<aside class="three columns full-height" id="sidebar">
+				<div id="nav" style="z-index: 10;">
+					<div class="hide-for-small" id="center-nav">
+						<ul class="side-nav">
+							<li><a class="large button" href="#show/whisky">Whisky</a></li>
+							<li><a class="large button" href="#show/gin">Gin</a></li>
+							<li><a class="large button" href="#show/vodka">Wodka</a></li>
+						</ul>
+						<div class="row collapse hide-for-small" id="search">
+							<div class="twelve mobile-three columns">
+								<form id="search-form">
+									<input type="text" id="search-input" />
+								</form>
+							</div>
+							<div class="four mobile-one columns">
+								<a class="small button expand postfix" id="search-submit">
+									<i class="foundicon-search"></i>
+								</a>
+							</div>
+						</div> <!-- End #search -->						
+					</div>
+					<div class="show-for-small">
+						<ul class="side-nav button-group even four-up">
+							<li><a class="small button" href="#">Whisky</a></li>
+							<li><a class="small button" href="#">Gin</a></li>
+							
+							<li><a class="small button" href="#">Wodka</a></li>
+							<li><input type="text"></li>
+						</ul>
+					</div>
+				</div> <!-- End #nav -->
+				<div class="row" id="impressum-wrapper">
+					<span id="impressum">
+						<a href="#" data-reveal-id="impressum-dialog">
+							Impressum
+						</a>
+					</span>
+				</div>				
+			</aside>
+			<div class="thirteen columns full-height">
+				<div class"row">
+					<div class="three columns offset-by-thirteen" >
+						<div id="logo-wrapper">
+							<img id="logo" src="images/logo-399x205.png" />
+						</div>
+					</div>
+				</div>
+				<div class="row" id="width-hidden">
+					<div class="three columns"></div>
+					<div class="ten columns"></div>
+					<div class="three columns"></div>
+				</div>
+				<div class="row full-height" id="carousel">
+				</div>
+			</div>
+			<div class="mobile-four columns show-for-small">
+				<a href="#" data-reveal-id="impressum-dialog" data-closeOnBackgroundClick="true">Impressum</a>
+			</div>		
+		</div><!-- End main-row -->
+
+	</div><!-- container -->
+
+	<div id="impressum-dialog" class="reveal-modal xlarge">
+		<div class="row">
+			<div class="eight columns">
+				<h2>Impressum</h2>
+				<h5>Angaben gemäß § 5 TMG:</h5>
+				<p>
+					HAW Hamburg<br>
+					Finkenau 35<br>
+					22081 Hamburg
+				</p>
+				<p>
+					<strong>Kontakt:</strong><br>
+					Telefon: 040-12345<br>
+					Telefax: 040-12345<br>
+					E-Mail: meik.sauerberg@haw-hamburg.de
+				</p>
+			</div>
+			<div class="eight columns">
+				<img id="logo" src="images/logo-399x205.png" />
+			</div>
+		</div>
+		<a class="close-reveal-modal">&#215;</a>
+	</div>
+
+	<script id="spirituose-template" type="text/template">
+		<div class="row full-height" style="position: relative;">
+		<div class="caption">
+			<h3><%= titel %></h3>
+		</div>
+			<div class="six columns full-height mobile-one">
+					<div class="full-height spirituose-bild hide-for-small" style="background-image: url(<%= bild %>);"></div>
+					<img class="show-for-small" src="<%= bild %>" style="max-height: 100%;"/>
+			</div>
+			<div class="ten columns mobile-three">
+				<div id="center-titel">
+					<h2>&nbsp;</h2>
+				</div>
+				<ul class="accordion">
+					<li class="active">
+						<div class="title">
+							<h5>
+								Herkunft
+							</h5>
+						</div>
+						<div class="content">
+							<p><%= herkunft %></p>
+						</div>
+					</li>
+					<li>
+						<div class="title">
+							<h5>Zusammensetzung</h5>
+						</div>
+						<div class="content">
+							<p><%= zusammensetzung %></p>
+						</div>
+					</li>
+					<li>
+						<div class="title">
+							<h5>Besonderheiten</h5>
+						</div>
+						<div class="content">
+							<p><%= besonderheiten %></p>
+						</div>
+					</li>
+				</ul>
+				<a class="button" data-animation="fade" data-closeOnBackgroundClick="true" 
+					data-reveal-id="serviervorschlag-dialog" href="#">Serviervorschlag</a>
+			</div>
+		</div>
+		<div id="serviervorschlag-dialog" class="reveal-modal medium">
+			<img src="<%= serviervorschlag %>">
+			<a class="close-reveal-modal">&#215;</a>
+		</div>
+	</script>
+
+	<script id="spirituose-klein-template" type="text/template">
+		<div class="spirituose-bild full-height" style="background-image: url(<%= bild %>);">
+		</div>
+	</script>
+
+
+	<!-- Included JS Files (Uncompressed) -->
+	<script src="javascripts/foundation/jquery.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.magellan.js"></script>
+	
+	<script src="javascripts/foundation/jquery.cookie.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.forms.js"></script>
+	
+	<script src="javascripts/foundation/jquery.event.move.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.alerts.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.tooltips.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.tabs.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.topbar.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.navigation.js"></script>
+	
+	<script src="javascripts/foundation/jquery.event.swipe.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.mediaQueryToggle.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.orbit.js"></script>
+	
+	<script src="javascripts/foundation/jquery.placeholder.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.accordion.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.clearing.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.buttons.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.joyride.js"></script>
+	
+	<script src="javascripts/foundation/jquery.foundation.reveal.js"></script>
+
+	<script src="javascripts/foundation/app.js"></script>
+	
+	<script src="javascripts/lib/jquery-ui-1.10.2.js"></script>
+
+	<script src="javascripts/lib/underscore-1.4.4.js"></script>
+
+	<script src="javascripts/lib/backbone-0.9.10.js"></script>
+
+	<script src="javascripts/lib/jquery.carouFredSel-6.2.0.js"></script>
+	<script src="javascripts/lib/helper-plugins/jquery.touchSwipe.min.js"></script>
+	<script src="javascripts/lib/helper-plugins/jquery.ba-throttle-debounce.min.js"></script>
+
+	<!--<script src="javascripts/spirituosen.js"></script>-->
+	<script src="javascripts/drinkfinity.js"></script>
+</body>
+</html>

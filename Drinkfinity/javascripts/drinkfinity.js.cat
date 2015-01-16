@@ -1,0 +1,442 @@
+var flaschen;
+(function ($) {
+	var Flasche = Backbone.Model.extend({
+		defaults: {
+			titel:'A',
+			bild:'img/absolut.jpg',
+			herkunft:'',
+			zusammensetzung:'',
+			besonderheiten:''
+		}
+	});
+
+	var FlascheCenterView2 = Backbone.View.extend({
+		template:$("#flasche-template").html(),
+
+		render:function () {
+			var tmpl = _.template(this.template); //tmpl is a function that takes a JSON object and returns html
+
+			this.$el.html(tmpl(this.model.toJSON())); //this.el is what we defined in tagName. use $el to get access to jQuery html() function
+			return tmpl(this.model.toJSON()); //return this;
+		}
+	});
+	var FlascheKleinView2 = Backbone.View.extend({
+		template:$("#flasche-klein-template").html(),
+
+		render:function () {
+			var tmpl = _.template(this.template); //tmpl is a function that takes a JSON object and returns html
+			
+			this.$el.html(tmpl(this.model.toJSON())); //this.el is what we defined in tagName. use $el to get access to jQuery html() function
+			return tmpl(this.model.toJSON());
+		}
+	});
+	var FlascheCenterView = Backbone.View.extend({
+		template:'<div class="flasche-gross" id="<%= id %>">' + $("#flasche-template").html() + "</div>",
+
+		render:function () {
+			var tmpl = _.template(this.template); //tmpl is a function that takes a JSON object and returns html
+
+			this.$el.html(tmpl(this.model.toJSON())); //this.el is what we defined in tagName. use $el to get access to jQuery html() function
+			return tmpl(this.model.toJSON()); //return this;
+		}
+	});
+	var FlascheKleinView = Backbone.View.extend({
+		template:'<div class="flasche-klein" id="<%= id %>">' + $("#flasche-klein-template").html() + "</div>",
+
+		render:function () {
+			var tmpl = _.template(this.template); //tmpl is a function that takes a JSON object and returns html
+			
+			this.$el.html(tmpl(this.model.toJSON())); //this.el is what we defined in tagName. use $el to get access to jQuery html() function
+			return tmpl(this.model.toJSON());
+		}
+	});
+	
+
+	flaschen = {
+		tanqueraygin: new Flasche({
+			id: 'tanqueraygin',
+			titel:'Tanqueray London Dry Gin',
+			sorte: 'gin',
+			bild:'images/flaschen/tanqueray.png',
+			serviervorschlag: 'images/flaschen/tonic.png',
+			herkunft:'Benannt nach seinem Hersteller Charles Tanqueray, stammt dieser Gin aus London. Aufgrund des zweiten Weltkriegs wurde die Destillerie allerdings nach Schottland verlegt. Bei der Herstellung werden die verschiedenen Gewürze während der Destillation als Aromastoffe hinzugefügt.',
+			zusammensetzung:'Die essenziellen Bestandteile sind Wacholderbeeren, Koriandersamen, Lakritze, Engelwurz und Getreidespirit. Der Alkoholgehalt variiert in den verschiedenen Editionen zwischen 47,3% alc. vol., 43,1% alc. vol. und 40% alc. vol.',
+			besonderheiten:'Die auffällig geformte Flasche ist einem englischen Hydranten nachempfunden und ist auf der ganzen Welt als ein Symbol für Klasse und Überlegenheit bekannt. Von denen im zweiten Weltkrieg zerstörten Brennkesseln ist nur einer verschont geblieben, der auch bis heute noch in Betrieb ist. Tanqueray London Dry Gin wird häufig für Longdrinks verwendet.',
+		}),
+		lagavulinclassic: new Flasche({
+			id: 'lagavulinclassic',
+			titel:'Lagavulin "Classic Malt"',
+			sorte: 'whisky',
+			bild:'images/flaschen/lagavulin.png',
+			serviervorschlag: 'images/flaschen/whisky.png',
+			herkunft:'Der Whisky kommt von der schottischen Küste aus der Region Islay. Das Wasser, was in der Lagavulin-Brennerei verwendet wird, stammt aus einem nahe gelegenen Fluss, wodurch der Whisky sein Torfaroma erhält. Das Destillieren erfolgt in birnenförmigen Kesseln und mit 16 Jahren Reifung im Fass hält der Lagavulin 16 Years unter den Classic Malts damit den Rekord.',
+			zusammensetzung:'Der Alkoholgehalt beträgt 43% alc. vol., für die Herstellung wird als Basis Malzbrei verwendet.',
+			besonderheiten:'Die 16 Years-Edition ist die bestverkaufte Sorte aus dem Hause Lagavulin und ungeheuer populär. Ihr stark torfiger, rauchiger Geschmack mit langem Abgang, bei dem man quasi die Küstenherkunft rausschmecken kann, macht diese Sorte so einzigartig.',
+		}),
+		bavarkavodka: new Flasche({
+			id: 'bavarkavodka',
+			titel:'Bavarka Vodka',
+			sorte: 'vodka',
+			bild:'images/flaschen/bavarkavodka.png',
+			serviervorschlag: 'images/flaschen/tonic.png',
+			herkunft:'Zur Herstellung wird der Vodka aus Oberbayern in einer Kolonnenbrennerei in München unter Aufsicht siebenfach destilliert, um alle unerwünschten Nebenbestandteile loszuwerden. Anschließend lagert das Destillat ein halbes Jahr lang in Steingutgefäßen.',
+			zusammensetzung:'Es werden ausschließlich deutsche Kartoffeln und Quellwasser aus dem Mangfallgebirge verwendet. Der Alkoholgehalt beträgt 43% vol.',
+			besonderheiten:'Bavarka Vodka ist der erste Vodka der Firma Lantenhammer. Das endgültige Flaschendesign steht bisher noch nicht fest. Dieser Vodka zeigt pur fruchtige Töne und wird auch zum Mischen von klassischen Cocktails empfohlen.',
+		}),
+		greygoose: new Flasche({
+			id: 'greygoose',
+			titel:'Grey Goose',
+			sorte: 'vodka',
+			bild:'images/flaschen/greygoose.png',
+			serviervorschlag: 'images/flaschen/tonic.png',
+			herkunft:'Grey Goose ist ein französischer Wodka, der auf Basis von Weizen aus der Region La Beauce und Wasser, das durch den Kalkstein der Champange natürlich gereinigt wurde, hergestellt wird. Der Wodka wird fünffach destilliert.',
+			zusammensetzung:'Der Wodka hat einen Alkoholanteil von 40%. Je nach Sorte werden noch bestimmte Aromastoffe hinzugefügt, was den Alkoholgehalt variieren lässt.',
+			besonderheiten:'Grey Goose gibt es auch in Sondereditionen von Armani oder Michalsky und in verschiedenen Aromen wie Orange, Zitrone, Birne und Vanille. Die Flaschen besitzen außerdem Vielfarbdrucke.',
+		}),
+		absolutvodka: new Flasche({
+			id: 'absolutvodka',
+			titel:'Absolut Vodka "Blue Label"',
+			sorte: 'vodka',
+			bild:'images/flaschen/absolutvodka.png',
+			serviervorschlag: 'images/flaschen/tonic.png',
+			herkunft:'Der Absolut Vodka kommt aus der Provin Skåne län, Åhus in Schweden. Dort wurde die fraktionierte Destillation erfunden, wobei unsaubere und unerwünschte Komponenten wie zB. Fuselöle abgetrennt weren. Dadurch entsteht am Ende ein Branntwein von höherer Qualität als bei der klassischen Herstellung in Brandblasen.',
+			zusammensetzung:'Der Alkoholgehalt beträgt 40% alc. vol. und die Basis ist Winterweizen.',
+			besonderheiten:'Die spezielle Flaschenform, die an Schwedische Apotheken-Flaschen erinnern soll ist das  Markenzeichen des Unternehmens. Es gibt eine große Vielfalt an Varianten und limitierten Sondereditionen, die sich im Design der Flasche, abweichendem Geschmack oder auch Flaschenüberzug („Second Skin“) unterscheiden.',
+		}),
+		monkey47: new Flasche({
+			id: 'monkey47',
+			titel:'Monkey 47 Gin',
+			sorte: 'gin',
+			bild:'images/flaschen/monkey-47.png',
+			serviervorschlag: 'images/flaschen/tonic.png',
+			herkunft:'Der Monkey 47 Gin stammt aus dem Schwarzwald im Nachkriegsdeutschland. Traditionell wird dieser Gin auf britische Weise hergestellt und durch regionale Inhalte spezialisiert.',
+			zusammensetzung:'Der Alkoholgehalt beträgt 47% alc.vol., wobei zur Herstellung 47 verschiedene Zutaten, unter anderem Wacholderbeeren aus dem Schwarzwald verwendet werden.',
+			besonderheiten:'Der Name geht auf den Namen des Gasthofs „Zum wilden Affen“ zurück, den der Entwickler Montgomery „Monty“ Collins nach dem Zweiten Weltkrieg eröffnete.'
+		}),
+		jackdaniels: new Flasche({
+			id: 'jackdaniels',
+			titel:'Jack Daniel\'s old No.7',
+			sorte: 'whisky',
+			bild:'images/flaschen/jack-daniels.png',
+			serviervorschlag: 'images/flaschen/whisky-cola.png',
+			herkunft:'Jack Daniel\'s old No.7 stammt aus Lynchburg, Tennessee. Die Destillerie befindet sich in einer Kalksteinquelle mit eisenfreiem Wasser. Dort wird der Whisky in einem von Jack Daniel\'s eigens entwickelten und patentierten Verfahren gefiltert: Zwölf Tage lang sickert durch eine ca. drei Meter dicke Zucker-Ahorn-Holzkohleschicht und wird dann für mindestens vier Jahre in Weißeichenfässern gelagert.',
+			zusammensetzung:'Der Alkoholgehalt beträgt 40% alc. vol. (vor 1990 noch 43%) und ein wichtiger Bestandteil ist die Maismaische. Der Zusammensetzung nach ist Jack Daniel\'s old No.7 ein „Bourbon“, jedoch wird von Seiten des Unternehmens die Bezeichnung „Tennessee-Whiskey“ verwendet.',
+			besonderheiten:'Es ist unbekannt was „old No.7“ bedeutet, denn das Geheimnis hat Gründer Jasper „Jack“ Newton Daniel mit ins Grab genommen. Dieser Mythos wird insofern gerne für Werbezwecke genutzt.'
+		})
+	};
+
+	var Sorte = Backbone.Collection.extend({
+        model: Flasche
+    });
+
+	var sorten = {
+		gin: new Sorte([flaschen.tanqueraygin, flaschen.monkey47]),
+		vodka: new Sorte([flaschen.absolutvodka, flaschen.bavarkavodka, flaschen.greygoose]),
+		whisky: new Sorte([flaschen.jackdaniels, flaschen.lagavulinclassic])
+	};
+
+
+	var CarouselView = Backbone.View.extend({
+		initialize : function() {
+			var that = this;
+			this._flaschenViews = [];
+
+			this.collection.each(function(flasche) {
+				if (that._flaschenViews.length === 1) {
+					that._flaschenViews.push(new FlascheCenterView({
+						model : flasche,
+					}));
+				} else {
+					that._flaschenViews.push(new FlascheKleinView({
+						model : flasche,
+					}));
+				}
+		});
+
+		if (this.collection.length < 4) {
+			this.collection.each(function(flasche) {
+				that._flaschenViews.push(new FlascheKleinView({
+					model : flasche,
+				}));
+			});
+		}
+
+
+	  },
+	 
+	  render : function() {
+	    var that = this;
+	    // Clear out this element.
+	    $(this.el).empty();
+
+	    // Render each sub-view and append it to the parent view's element.
+	    _(this._flaschenViews).each(function(fv) {
+	      $(that.el).append(fv.render());
+	    });
+	  }
+	});
+
+	function carouselView(sorte) {
+		return new CarouselView({
+			collection: sorten[sorte],
+			el: $('#carousel')
+		});
+	}
+
+	var Router = Backbone.Router.extend({
+		routes: {
+			"whisky(/:flasche)":	"whisky",
+			"gin(/:flasche)":		"gin",
+			"vodka(/:flasche)":	"vodka",
+			'*path':  'whisky'
+		},
+	});
+
+
+
+
+	function flascheKleinView(typ) {
+		return new FlascheKleinView2({model: flaschen[typ]});
+	}
+	function flascheCenterView(typ) {
+		return new FlascheCenterView2({model: flaschen[typ]});
+	}
+	
+	$(document).ready(function () {
+		var router = new Router();
+		router.on("route:whisky", function(flasche) {
+			$("#carousel").trigger("destroy");
+			carouselView("whisky").render();
+			resizeHandler();
+			if (flasche !== 'undefined') {
+				var startItem = $("#" + flasche).prev();
+				initCarousel(startItem);
+			}
+			initCarousel();
+			
+		});
+		router.on("route:gin", function(flasche) {
+			$("#carousel").trigger("destroy");
+			carouselView("gin").render();
+			resizeHandler();
+			if (flasche !== 'undefined') {
+				var startItem = $("#" + flasche).prev();
+				initCarousel(startItem);
+			}			
+			initCarousel();
+		});
+		router.on("route:vodka", function(flasche) {
+			$("#carousel").trigger("destroy");
+			carouselView("vodka").render();
+			resizeHandler();
+			if (flasche !== 'undefined') {
+				var startItem = $("#" + flasche).prev();
+				initCarousel(startItem);
+			}			
+			initCarousel();
+		});
+		
+
+		//jquery selectors
+		var $window = $(window)
+		, $body = $("body")
+		, $div = $("div")
+		, $mainContainer = $("#main-container")
+		, $flascheKlein = $(".flasche-klein")
+		, $flascheCenter = $(".flasche-gross")
+		, $logo = $("#logo")
+		, $logoWrapper = $('#logo-wrapper')
+		, $centerNav = $("#center-nav");
+
+		var contentHeight;
+		Backbone.history.start();		
+		function resizeHandler() {
+			$flascheKlein = $(".flasche-klein");
+			$flascheCenter = $(".flasche-gross");
+
+			//reset modified style properties
+			$mainContainer.css('margin-top', '');
+			$body.css('height', '');
+			$logo.css('max-height', '');
+			$flascheKlein.css('margin-top', '');
+			if ($window.width() > 767 || $window.width === 0) {
+				var windowHeight = $window.height();
+				contentHeight = $mainContainer.height();
+				var maxMarginTop = (windowHeight - contentHeight) / 2;
+				var marginTop = Math.max(maxMarginTop, 15);
+
+				$mainContainer.css('margin-top', marginTop);
+
+				contentHeight = $mainContainer.height();
+				$body.css("height", windowHeight - 2 * marginTop);
+				$div.css("max-height", contentHeight - (marginTop / 2));
+
+				
+				$flascheKlein.height(contentHeight / 2).css('margin-top', (contentHeight / 4));
+
+				//logo
+				var logoMarginTop = -1 * Math.min(25, marginTop);
+				$logoWrapper.css("top", logoMarginTop);
+				var maxLogoHeight = contentHeight / 4 - 10;
+				if ($logo.height() > maxLogoHeight || $logo.height() === 0) {
+					$logo.css('max-height', maxLogoHeight);
+				}
+				//nav
+				var navHeight = $centerNav.height();
+				$centerNav.css('margin-top', (contentHeight - navHeight)/2);
+				//carousel
+				if ($("#carousel").width() > $window.width()) {
+					$("#carousel").carouFredSel({height: contentHeight});
+				}
+				$("#carousel").trigger("updateSizes");
+			}
+		}
+		//resizeHandler(); //init
+		$window.resize($.throttle(100, resizeHandler)); //fire not more often than every 100ms	
+
+
+		function initCarousel(startItem) {
+			var smallWidth = $("#width-hidden .three").first().width() - 15;
+			var centerWidth = $("#width-hidden .ten").width() - 15;
+			$(".flasche-klein").width(smallWidth);
+			$(".flasche-gross").width(centerWidth);
+
+
+			var scrollCfg = {
+				items: 1,
+				duration: 700,
+				//easing: "cubic",
+				onBefore: function (data) {
+					var direction = data.scroll.direction;
+					var aniDuration = data.scroll.duration;
+					var $flascheGross = $(".flasche-gross");
+					var nextCenter;
+					if (direction == "prev") {
+						nextCenter = $flascheGross.prev();
+					} else if (direction == "next") {
+						nextCenter = $flascheGross.next();
+					}
+					var centerID = $flascheGross.attr("id");
+					var nextID = $(nextCenter).attr("id");
+					var nextMarginTop = $(nextCenter).css('margin-top');
+					var nextHeight = $(nextCenter).height();
+					setTimeout(function () {
+						$flascheGross.removeClass('flasche-gross').addClass('flasche-klein')
+							.html(flascheKleinView(centerID).render())
+							.animate(
+								{marginTop: nextMarginTop, height: nextHeight},
+								{queue: false, duration: aniDuration*0.2}
+							)
+							.animate(
+								{width: smallWidth},
+								{queue: true, duration: aniDuration*0.5}
+							);
+						$(nextCenter).animate(
+							{width: centerWidth},
+							{queue: false, duration: aniDuration*0.7}
+							);
+					});
+					setTimeout(function () {
+						$(nextCenter).removeClass('flasche-klein').addClass('flasche-gross')
+							.html(flascheCenterView(nextID).render())					
+							.animate(
+								{marginTop: 0},
+								{queue: false, duration: aniDuration*.1 }
+								)
+							.animate(
+								{height: ($(this).height() * 2)},
+								{queue: false, duration: aniDuration*.3}
+								);
+						$("#carousel").trigger("updateSizes");
+							
+					}, aniDuration*.7);
+				}
+			};
+			var scrollCfgSwipe = scrollCfg;
+			scrollCfgSwipe.onTouch = true;
+
+			$("#carousel").carouFredSel({
+				height: contentHeight,
+				items: {
+					visible : 3,
+					width: "variable",
+					start: (startItem || 0)
+				},
+				scroll: scrollCfg,
+				auto: false,
+				swipe: scrollCfgSwipe,
+				next: {
+					button : "#carousel-next-btn",
+					key : "right"
+				},
+				prev: {
+					button : "#carousel-prev-button",
+					key : "left"
+				},
+				infinite: true,
+				//responsive : true,
+			});
+		}
+
+
+		var completeValues = [
+			{label: "Whisky", sorte: "whisky"},
+			{label: "Gin", sorte: "gin"},
+			{label: "Vodka", sorte: "vodka"},
+			{label: "Wodka", sorte: "vodka"}
+		];
+		_.each(_.values(flaschen), function (flasche) {
+			completeValues.push({
+				label: flasche.attributes.titel,
+				id: flasche.attributes.id,
+				sorte: flasche.attributes.sorte
+			});
+		});
+
+ $.widget( "custom.catcomplete", $.ui.autocomplete, {
+    _renderMenu: function( ul, items ) {
+      var that = this,
+        currentSorte = "";
+      $.each( items, function( index, item ) {
+        if ( item.sorte != currentSorte ) {
+          ul.append( "<li class='ui-autocomplete-sorte'>" + item.sorte + "</li>" );
+          currentSorte = item.sorte;
+        }
+        console.dir(item);
+        ul.append("<li><a>" + item.label + "</a></li>");
+        //that._renderItemData( ul, item );
+      });
+    }
+  });
+
+		$( "#search-input" ).catcomplete({
+			source: function(request, response) {
+				var matcher = new RegExp('\\b' + $.ui.autocomplete.escapeRegex(request.term), "i");
+				var matched = $.grep(completeValues, function(value) {
+					return matcher.test(value.label);
+				});
+				console.log(matched);
+				response(matched);
+			},
+			select: function( event, ui ) {
+				$( "#search-input" ).val( ui.item.label );
+				if (ui.item.hasOwnProperty("id")) {
+					$("#search-link").val(ui.item.sorte + "/" + ui.item.id);
+				} else {
+					$("#search-link").val(ui.item.sorte);
+				}
+				return false;
+			}
+		});
+
+
+
+		$('#search-submit').click(function() {
+			router.navigate($("#search-link").val(), true);
+		});
+
+		//initCarousel();
+	});
+})(jQuery);
+		/*var remainingContentHeight = (contentHeight / (contentHeight + marginTop) * 100) + '%';
+		$("body").css('height', remainingContentHeight);*/
